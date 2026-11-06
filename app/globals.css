@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* Tailwind has no utility for org chart connectors, so the lines between boxes are drawn here. */
+.tree-children {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.75rem;
+  position: relative;
+}
+
+.tree-children::before {
+  border-left: 1px solid var(--color-gray-400);
+  content: "";
+  height: 0.75rem;
+  left: 50%;
+  position: absolute;
+  top: 0;
+}
+
+.tree-node {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.75rem 0.5rem 0;
+  position: relative;
+}
+
+.tree-children > .tree-node::before {
+  border-left: 1px solid var(--color-gray-400);
+  border-top: 1px solid var(--color-gray-400);
+  content: "";
+  height: 0.75rem;
+  left: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.tree-children > .tree-node:last-child::before {
+  border-right: 1px solid var(--color-gray-400);
+  border-left: 0;
+  left: 0;
+  right: 50%;
+}
+
+.tree-children > .tree-node:only-child::before {
+  border-top: 0;
+  left: 50%;
+  right: auto;
+  border-left: 1px solid var(--color-gray-400);
+  border-right: 0;
+}
