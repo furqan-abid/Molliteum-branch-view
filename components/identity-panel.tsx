@@ -1,4 +1,5 @@
 import { logOut } from "@/app/actions";
+import { LogOutButton } from "@/components/log-out-button";
 
 type Props = { name: string; orgName: string };
 
@@ -9,12 +10,7 @@ export function IdentityPanel({ name, orgName }: Props) {
         You are {name}. You sit in {orgName}.
       </h1>
       <form action={logOut}>
-        <button
-          type="submit"
-          className="rounded border border-gray-400 px-4 py-2 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
-        >
-          Log out
-        </button>
+        <LogOutButton />
       </form>
     </section>
   );

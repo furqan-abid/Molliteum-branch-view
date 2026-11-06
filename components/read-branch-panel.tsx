@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { Spinner } from "@/components/spinner";
 import { createClient } from "@/lib/supabase/browser";
 import { flattenTree } from "@/lib/tree";
 
@@ -55,8 +56,10 @@ export function ReadBranchPanel() {
         <button
           type="submit"
           disabled={running}
-          className="rounded border border-gray-400 px-4 py-2 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:opacity-60"
+          aria-busy={running}
+          className="flex items-center gap-2 rounded border border-gray-400 px-4 py-2 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed"
         >
+          {running && <Spinner />}
           Ask the database
         </button>
       </form>

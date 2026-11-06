@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { logIn } from "@/app/actions";
+import { LoginButtons } from "@/components/login-buttons";
 import { createClient } from "@/lib/supabase/server";
-import { LOGINS } from "@/lib/tree";
 
 type Props = { searchParams: Promise<{ error?: string }> };
 
@@ -21,18 +21,9 @@ export default async function LoginPage({ searchParams }: Props) {
           That login did not work. Please try again.
         </p>
       )}
-      <div className="space-y-2">
-        {LOGINS.map(({ name, org }) => (
-          <form key={name} action={logIn.bind(null, name)}>
-            <button
-              type="submit"
-              className="w-full rounded border border-gray-400 bg-white px-4 py-3 text-left hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
-            >
-              Log in as {name} ({org})
-            </button>
-          </form>
-        ))}
-      </div>
+      <form action={logIn}>
+        <LoginButtons />
+      </form>
     </section>
   );
 }

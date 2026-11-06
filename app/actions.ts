@@ -7,8 +7,11 @@ import { demoEmail, LOGINS } from "@/lib/tree";
 
 // Signing in on the server keeps the demo password out of the browser.
 // The name comes from the client, so it is checked against the offered logins.
-export async function logIn(firstName: string): Promise<void> {
-  if (!LOGINS.some((login) => login.name === firstName)) redirect("/login?error=1");
+export async function logIn(formData: FormData): Promise<void> {
+  const firstName = formData.get("firstName");
+  if (typeof firstName !== "string" || !LOGINS.some((login) => login.name === firstName)) {
+    redirect("/login?error=1");
+  }
 
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({
